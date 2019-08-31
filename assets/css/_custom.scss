@@ -1,0 +1,13 @@
+.navbar-brand {
+    .logo {
+        display: block;
+        font-family: 'Quicksand';
+        font-weight: 700;
+        font-size: 2em;
+        color: hsl(348, 100%, 41%);
+        
+        &:hover {
+            color: hsl(348, 100%, 41%);
+        }
+    }
+}

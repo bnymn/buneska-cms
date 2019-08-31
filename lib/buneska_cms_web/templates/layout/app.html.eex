@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Buneska CMS</title>
+        <link href="https://fonts.googleapis.com/css?family=Quicksand:700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+        <link rel="stylesheet" href="<%= Routes.static_path(@conn, "/css/app.css") %>"/>
+    </head>
+    <body>
+        <nav id="navbar" class="navbar has-shadow is-spaced">
+            <div class="container">
+                <div class="navbar-brand">
+                    <a href="#" class="navbar-item logo">BUNESKA</a>
+                </div>
+                <div class="navbar-menu">
+                    <div class="navbar-start">
+                        <a href="#" class="navbar-item">
+                            <span class="icon">
+                                <i class="fas fa-home"></i>
+                            </span>
+                            <span>
+                                Home
+                            </span>
+                        </a>
+                        <a href="#" class="navbar-item">
+                            <span class="icon">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span>
+                                Contact
+                            </span>
+                        </a>
+                    </div>
+                    <div class="navbar-end">
+                        <%= if Pow.Plug.current_user(@conn) do %>
+                            <%= link to: Routes.pow_session_path(@conn, :delete), method: :delete, class: 'navbar-item' do %>
+                                <span class="icon">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                </span>
+                                Logout
+                            <% end %>
+                        <% else %>
+                            <%= link to: Routes.pow_registration_path(@conn, :new), class: 'navbar-item' do %>
+                                <span class="icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </span>
+                                <span>
+                                    Signup
+                                </span>
+                            <% end %>
+                            <%= link to: Routes.pow_session_path(@conn, :new), class: 'navbar-item' do %>
+                                <span class="icon">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                </span>
+                                Login
+                            <% end %>
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <main role="main">
+            <div class="container">
+                <main class="section">
+                    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
+                    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+                </main>
+                <%= render @view_module, @view_template, assigns %>
+            </div>
+        </main>
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
+    </body>
+</html>
+
