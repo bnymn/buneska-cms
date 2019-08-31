@@ -32,6 +32,28 @@
                                 Contact
                             </span>
                         </a>
+                        <%= if Pow.Plug.current_user(@conn) do %>
+                            <div class="navbar-item has-dropdown is-hoverable">
+                                <%= link to: '#', class: 'navbar-link' do %>
+                                    <span class="icon">
+                                        <i class="fas fa-tools"></i>
+                                    </span>
+                                    <span>
+                                        Admin
+                                    </span>
+                                <% end %>
+                                <div id="adminDropdown" class="navbar-dropdown">
+                                    <%= link to: '#', class: 'navbar-item' do %>
+                                        <span class="icon">
+                                            <i class="fas fa-file-alt"></i>
+                                        </span>
+                                        <span>
+                                            Posts
+                                        </span>
+                                    <% end %>
+                                </div>
+                            </div>
+                        <% end %>
                     </div>
                     <div class="navbar-end">
                         <%= if Pow.Plug.current_user(@conn) do %>
@@ -70,7 +92,7 @@
                 <%= render @view_module, @view_template, assigns %>
             </div>
         </main>
-        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <script defer src="https://use.fontawesome.com/releases/v5.10.2/js/all.js"></script>
         <script type="text/javascript" src="<%= Routes.static_path(@conn, "/js/app.js") %>"></script>
     </body>
 </html>
